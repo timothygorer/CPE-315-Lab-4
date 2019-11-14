@@ -24,6 +24,36 @@ public class Parser {
         return false;
     }
 
+    public ArrayList<PLRegister> thirdPass(ArrayList<String> instructions) {
+        ArrayList<PLRegister> plain_text = new ArrayList<PLRegister>();
+        for (String s : instructions) {
+            String [] instruction_codes = s.split("\\s+");
+            String opcode = instruction_codes[0];
+            String [] pipeInfo = new String[4];
+            PLRegister if_id = new PLRegister("empty");
+
+            if (Utils.isRegisterFormat(opcode)) {
+                pipeInfo = Utils.processRegisterFormat(instruction_codes);
+                if_id.rs = pipeInfo[0];
+                if_id.rt = pipeInfo[1];
+                if_id.rd = pipeInfo[2];
+                if_id.op = pipeInfo[3];
+            } else if (Utils.isJumpFormat(opcode)) {
+                pipeInfo = Utils.processJumpFormat(instruction_codes);
+                if_id.branchAddress = Integer.parseInt(pipeInfo[0]);
+                if_id.op = pipeInfo[3];
+            } else {
+                pipeInfo = Utils.processImmediateFormat(instruction_codes);
+                if_id.rs = pipeInfo[0];
+                if_id.rt = pipeInfo[1];
+                if_id.branchAddress = Integer.parseInt(pipeInfo[2]);
+                if_id.op = pipeInfo[3];
+            }
+            plain_text.add(if_id);
+        }
+        return plain_text;
+    }
+
     // Pre: String s is a string which contains a label.
     // Post: This function strips String s's label and add its to the labelAddresses map.
     public void addLabelToLabelAddressMap(String s) {

@@ -11,6 +11,7 @@ public class lab4 {
             Scanner assemblyFileScanner = null;
             ArrayList<String> instrs = new ArrayList<String>();
             ArrayList<String> instrCodes = new ArrayList<String>();
+            //ArrayList<PipelineRegister> textInstrs = new ArrayList<>();
             HashMap<String, Integer> labelAddresses = new HashMap<String, Integer>();
             Interpreter i;
 
@@ -45,13 +46,18 @@ public class lab4 {
             myParser.performFirstPass();
             instrCodes = myParser.performSecondPass();
 
-            if (scriptFile != null) {
-                i = new Interpreter(instrCodes, scriptFile);
+            ArrayList<PLRegister> textInstrs = null;
+            textInstrs = myParser.thirdPass(instrCodes);
+
+
+            if (scriptFile == null) {
+                i = new Interpreter(instrCodes, textInstrs);
             } else {
-                i = new Interpreter(instrCodes);
+                i = new Interpreter(instrCodes, textInstrs, scriptFile);
             }
 
             i.performInterpretation();
+
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(0);

@@ -1,19 +1,26 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Simulator {
+public class Sim {
     private int pc;
     private int[] memory; // should be 8192 slots of memory where each slot is 4 bytes
     private int[] registers; // should be 32 slots of registers where each slot is 4 bytes
     private ArrayList<String> instrCodes;
     private HashMap<String, Integer> registerMap; // 5 bit code to register integer map
+    private int stallType;
+    private int stallQuantity;
+    private ArrayList<Boolean> branchesOccupied;
+    private ArrayList<PLRegister> plainTextInstructions;
 
-    public Simulator(ArrayList<String> instrCodes) {
-        pc = 0;
-        memory = new int[8192];
-        registers = new int[32];
+    public Sim(ArrayList<String> instrCodes, ArrayList<PLRegister> plainTextInstructions) {
+        this.pc = 0;
+        this.memory = new int[8192];
+        this.registers = new int[32];
         this.registerMap = createRegisterMap();
         this.instrCodes = instrCodes;
+        this.plainTextInstructions = plainTextInstructions;
+        this.branchesOccupied = new ArrayList<Boolean>();
+        this.stallQuantity = 0;
     }
 
     private HashMap<String, Integer> createRegisterMap() {
@@ -53,9 +60,29 @@ public class Simulator {
         return registerMap;
     }
 
+    public int instructionsSize() {
+        return this.instrCodes.size();
+    }
+
+    public boolean nextBranch() {
+        return this.branchesOccupied.get(0);
+    }
+
+    public int getRegisterValue(String reg) {
+        return this.registers[this.registerMap.get(reg)];
+    }
+
     // Post: returns the instruction at the current PC as a list of codes
     private String[] getInstructionAtPCAsCodes(){
         return this.instrCodes.get(pc).split(" ");
+    }
+
+    public String getInstruction(int lineNumber){
+        if (lineNumber >= instrCodes.size()) {
+            return "empty";
+        } else {
+            return instrCodes.get(lineNumber);
+        }
     }
 
     // Pre: steps through the program "steps" number of times, executing "steps" number of instructions or until last instruction is met.
@@ -63,23 +90,24 @@ public class Simulator {
     public int stepThrough(int steps) {
         int instructionsExecuted = 0;
 
-        for (instructionsExecuted = 0; instructionsExecuted < steps && pc != this.instrCodes.size(); instructionsExecuted++, pc++) {
-            String[] codesOfCurrentInstruction = getInstructionAtPCAsCodes();
+        if (this.stallQuantity <= 0) {
+            for (instructionsExecuted = 0; instructionsExecuted < 1 && pc != this.instrCodes.size(); instructionsExecuted++, pc++) {
+                String[] codesOfCurrentInstruction = getInstructionAtPCAsCodes();
 
-            if (codesOfCurrentInstruction[0].equals("000010") || codesOfCurrentInstruction[0].equals("000011")) { // if true then this instr. is J type
-                //System.out.println("about to interpret j format...");
-                interpJFormat(codesOfCurrentInstruction);
+                if (codesOfCurrentInstruction[0].equals("000010") || codesOfCurrentInstruction[0].equals("000011")) { // if true then this instr. is J type
+                    //System.out.println("about to interpret j format...");
+                    interpJFormat(codesOfCurrentInstruction);
+                } else if (codesOfCurrentInstruction[0].equals("000000")) { // if true then this instr. is R type
+                    //System.out.println("about to interpret r format...");
+                    interpRFormat(codesOfCurrentInstruction);
+                } else { // instr. is I type
+                    //System.out.println("about to interpret i format...");
+                    interpIFormat(codesOfCurrentInstruction);
+                }
             }
-
-            else if (codesOfCurrentInstruction[0].equals("000000")) { // if true then this instr. is R type
-                //System.out.println("about to interpret r format...");
-                interpRFormat(codesOfCurrentInstruction);
-            }
-
-            else { // instr. is I type
-                //System.out.println("about to interpret i format...");
-                interpIFormat(codesOfCurrentInstruction);
-            }
+        } else {
+            this.stallQuantity -= 1;
+            return 1;
         }
 
         return instructionsExecuted;
@@ -104,41 +132,47 @@ public class Simulator {
     private void interpIFormat(String[] codesOfCurrentInstruction) {
         String immediateCode = codesOfCurrentInstruction[codesOfCurrentInstruction.length - 1];
         int immediateInt = (int)Long.parseLong(extendBits(immediateCode, 32), 2);
-
         String opCode = codesOfCurrentInstruction[0]; // opCode of size 6
         int rs = registerMap.get(codesOfCurrentInstruction[1]); // converts a binary string of size 5 to integer
         int rt = registerMap.get(codesOfCurrentInstruction[2]); // converts a binary string of size 5 to integer
 
         if (opCode.equals("100011")) { // lw case
-            //System.out.println("lw");
             registers[rt] = memory[immediateInt + registers[rs]];
+            String currentRT = codesOfCurrentInstruction[2];
+            String nextRT = this.plainTextInstructions.get(this.pc + 1).rt;
+            String nextRS = this.plainTextInstructions.get(this.pc + 1).rs;
+            if (currentRT.equals(nextRT) || currentRT.equals(nextRS)) {
+                this.stallQuantity = 1;
+                this.stallType = 2;
+            }
         }
 
         else if (opCode.equals("000101")) { // bne case
-            //System.out.println("bne");
             if (registers[rs] != registers[rt]) {
                 pc = pc + immediateInt;
+                this.branchesOccupied.add(true);
+                this.stallQuantity += 3;
             } else {
-                pc = pc;
+                this.branchesOccupied.add(false);
             }
         }
 
         else if (opCode.equals("001000")) { // addi case
-            //System.out.println("addi");
             registers[rt] = registers[rs] + immediateInt;
         }
 
         else if (opCode.equals("000100")) { // beq case
-            //System.out.println("beq");
             if (registers[rs] == registers[rt]) {
                 pc = (pc + immediateInt);
+                this.branchesOccupied.add(true);
+                this.stallQuantity += 3;
+
             } else {
-                pc = pc;
+                this.branchesOccupied.add(false);
             }
         }
 
         else if (opCode.equals("101011")) { // sw case
-            //System.out.println("sw");
             memory[immediateInt + registers[rs]] = registers[rt];
         }
     }
@@ -146,29 +180,31 @@ public class Simulator {
     // Note that J-Format looks as follows: OpCode(6), Addr(26)
     // Post: interprets a J format instruction.
     private void interpJFormat(String[] codesOfCurrentInstruction) {
-        int lineNumber = Integer.parseInt(codesOfCurrentInstruction[1], 2);
+        int lineNumber = ~~Integer.parseInt(codesOfCurrentInstruction[1], 2);
 
         if (codesOfCurrentInstruction[0].equals("000011")) {    // jal stores return address into $ra
-            registers[31] = pc + 1;
+            this.registers[31] = this.pc + 1;
         }
 
-        pc = lineNumber - 1;  // assign label address to PC
+        this.pc = lineNumber - 1;  // assign label address to PC
+        this.stallQuantity = 1;
+        this.stallType = 1;
     }
 
-    // Note that R-Format looks as follows: OpCode(6), rs(5), rt(5), rd(5), shamt(5), funct(6)
+    // Pre: codesOfCurrentInstruction is a string array of the binary codes for the current instruction.
+    // Note that the array for the R-Format instruction looks as follows: [OpCode(6), rs(5), rt(5), rd(5), shamt(5), funct(6)]
     // Post: interprets an R format instruction.
     private void interpRFormat(String[] codesOfCurrentInstruction) {
         String functionCode = codesOfCurrentInstruction[codesOfCurrentInstruction.length - 1];
-
         int rs = registerMap.get(codesOfCurrentInstruction[1]); // converts a binary string of size 5 to integer
         int rt = 0, rd = 0, shamt = 0;
 
         if (functionCode.equals("001000")) { // if the function code is jr then don't set up rt and rd and shamt
             pc = this.registers[rs] - 1;
+            this.stallType = 1;
+            this.stallQuantity = 1;
             return;
-        }
-
-        else { // function code is not jr
+        } else { // function code is not jr
             rt = registerMap.get(codesOfCurrentInstruction[2]); // converts a binary string of size 5 to integer
             rd = registerMap.get(codesOfCurrentInstruction[3]); // converts a binary string of size 5 to integer
             shamt = registerMap.get(codesOfCurrentInstruction[4]); // converts a binary string of size 5 to integer
