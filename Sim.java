@@ -1,5 +1,17 @@
-import java.util.ArrayList;
-import java.util.HashMap;
+/*
+ * Description: Simulates operation of MIPS instructions; This includes
+ *              executing instructions and recording the changes those
+ *              instructions make. Simulator sets aside memory to emulate
+ *              the entities needed to run the MIPS language, including:
+ *
+ *                 - 8K 4-Byte Memory
+ *                 - 32 4-Byte Registers
+ *
+ */
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
 
 public class Sim {
     private int pc;
@@ -9,80 +21,19 @@ public class Sim {
     private HashMap<String, Integer> registerMap; // 5 bit code to register integer map
     private int stallType;
     private int stallQuantity;
-    private ArrayList<Boolean> branchesOccupied;
-    private ArrayList<PLRegister> plainTextInstructions;
+    private LinkedList<Boolean> branchesOccupied;
+    private ArrayList<PLRegister> textInstrs;
+    private ArrayList<ArrayList> instrCodesAndTextInstrs;
 
-    public Sim(ArrayList<String> instrCodes, ArrayList<PLRegister> plainTextInstructions) {
+    public Sim(ArrayList<PLRegister> plainTextInstructions, ArrayList<String> instrCodes) {
         this.pc = 0;
         this.memory = new int[8192];
         this.registers = new int[32];
         this.registerMap = createRegisterMap();
         this.instrCodes = instrCodes;
-        this.plainTextInstructions = plainTextInstructions;
-        this.branchesOccupied = new ArrayList<Boolean>();
+        this.textInstrs = plainTextInstructions;
+        this.branchesOccupied = new LinkedList<Boolean>();
         this.stallQuantity = 0;
-    }
-
-    private HashMap<String, Integer> createRegisterMap() {
-        HashMap<String, Integer> registerMap = new HashMap<String, Integer>();
-        registerMap.put("11111", 31);
-        registerMap.put("11110", 30);
-        registerMap.put("11101", 29);
-        registerMap.put("11100", 28);
-        registerMap.put("11011", 27);
-        registerMap.put("11010", 26);
-        registerMap.put("10111", 23);
-        registerMap.put("10110", 22);
-        registerMap.put("10101", 21);
-        registerMap.put("10100", 20);
-        registerMap.put("10011", 19);
-        registerMap.put("10010", 18);
-        registerMap.put("10001", 17);
-        registerMap.put("10000", 16);
-        registerMap.put("11001", 25);
-        registerMap.put("11000", 24);
-        registerMap.put("01111", 15);
-        registerMap.put("01110", 14);
-        registerMap.put("01101", 13);
-        registerMap.put("01100", 12);
-        registerMap.put("01011", 11);
-        registerMap.put("01010", 10);
-        registerMap.put("01001", 9);
-        registerMap.put("01000", 8);
-        registerMap.put("00111", 7);
-        registerMap.put("00110", 6);
-        registerMap.put("00101", 5);
-        registerMap.put("00100", 4);
-        registerMap.put("00011", 3);
-        registerMap.put("00010", 2);
-        registerMap.put("00001", 1);
-        registerMap.put("00000", 0);
-        return registerMap;
-    }
-
-    public int instructionsSize() {
-        return this.instrCodes.size();
-    }
-
-    public boolean nextBranch() {
-        return this.branchesOccupied.get(0);
-    }
-
-    public int getRegisterValue(String reg) {
-        return this.registers[this.registerMap.get(reg)];
-    }
-
-    // Post: returns the instruction at the current PC as a list of codes
-    private String[] getInstructionAtPCAsCodes(){
-        return this.instrCodes.get(pc).split(" ");
-    }
-
-    public String getInstruction(int lineNumber){
-        if (lineNumber >= instrCodes.size()) {
-            return "empty";
-        } else {
-            return instrCodes.get(lineNumber);
-        }
     }
 
     // Pre: steps through the program "steps" number of times, executing "steps" number of instructions or until last instruction is met.
@@ -91,17 +42,15 @@ public class Sim {
         int instructionsExecuted = 0;
 
         if (this.stallQuantity <= 0) {
-            for (instructionsExecuted = 0; instructionsExecuted < 1 && pc != this.instrCodes.size(); instructionsExecuted++, pc++) {
-                String[] codesOfCurrentInstruction = getInstructionAtPCAsCodes();
+            for (instructionsExecuted = 0; instructionsExecuted < steps && pc != this.instrCodes.size(); instructionsExecuted++, pc++) {
+                String instruction = instrCodes.get(pc);
+                String[] codesOfCurrentInstruction = instruction.split(" ");
 
                 if (codesOfCurrentInstruction[0].equals("000010") || codesOfCurrentInstruction[0].equals("000011")) { // if true then this instr. is J type
-                    //System.out.println("about to interpret j format...");
                     interpJFormat(codesOfCurrentInstruction);
                 } else if (codesOfCurrentInstruction[0].equals("000000")) { // if true then this instr. is R type
-                    //System.out.println("about to interpret r format...");
                     interpRFormat(codesOfCurrentInstruction);
                 } else { // instr. is I type
-                    //System.out.println("about to interpret i format...");
                     interpIFormat(codesOfCurrentInstruction);
                 }
             }
@@ -113,82 +62,42 @@ public class Sim {
         return instructionsExecuted;
     }
 
-    // Post: Extends "bs" which is a binary number string,
-    // to a binary string which is "length" amount of bits in length.
-    // Returns the resulting binary number string.
-    private String extendBits(String bs, int length) {
-        int bsLength = bs.length();
-        String mostSignificantBit = bs.substring(0, 1);
-
-        while (bsLength != length) {
-            bs = mostSignificantBit + bs;
-            bsLength++;
+    public void printMemory(int begin, int end) {
+        System.out.println();
+        for (int i = begin; i <= end; i++) {
+            System.out.print("[" +  i + "] = ");
+            System.out.println(memory[i]);
         }
-        return bs;
+        System.out.println();
     }
 
-    // Note that I-Format looks as follows: OpCode(6), rs(5), rt(5), immed(16)
-    // Post: interprets an I format instruction.
-    private void interpIFormat(String[] codesOfCurrentInstruction) {
-        String immediateCode = codesOfCurrentInstruction[codesOfCurrentInstruction.length - 1];
-        int immediateInt = (int)Long.parseLong(extendBits(immediateCode, 32), 2);
-        String opCode = codesOfCurrentInstruction[0]; // opCode of size 6
-        int rs = registerMap.get(codesOfCurrentInstruction[1]); // converts a binary string of size 5 to integer
-        int rt = registerMap.get(codesOfCurrentInstruction[2]); // converts a binary string of size 5 to integer
-
-        if (opCode.equals("100011")) { // lw case
-            registers[rt] = memory[immediateInt + registers[rs]];
-            String currentRT = codesOfCurrentInstruction[2];
-            String nextRT = this.plainTextInstructions.get(this.pc + 1).rt;
-            String nextRS = this.plainTextInstructions.get(this.pc + 1).rs;
-            if (currentRT.equals(nextRT) || currentRT.equals(nextRS)) {
-                this.stallQuantity = 1;
-                this.stallType = 2;
-            }
-        }
-
-        else if (opCode.equals("000101")) { // bne case
-            if (registers[rs] != registers[rt]) {
-                pc = pc + immediateInt;
-                this.branchesOccupied.add(true);
-                this.stallQuantity += 3;
-            } else {
-                this.branchesOccupied.add(false);
-            }
-        }
-
-        else if (opCode.equals("001000")) { // addi case
-            registers[rt] = registers[rs] + immediateInt;
-        }
-
-        else if (opCode.equals("000100")) { // beq case
-            if (registers[rs] == registers[rt]) {
-                pc = (pc + immediateInt);
-                this.branchesOccupied.add(true);
-                this.stallQuantity += 3;
-
-            } else {
-                this.branchesOccupied.add(false);
-            }
-        }
-
-        else if (opCode.equals("101011")) { // sw case
-            memory[immediateInt + registers[rs]] = registers[rt];
-        }
+    public void resetSimulator() {
+        this.registers = new int[32];
+        this.memory = new int[8192];
+        this.pc = 0;
+        System.out.println("        Simulator reset\n");
     }
 
-    // Note that J-Format looks as follows: OpCode(6), Addr(26)
-    // Post: interprets a J format instruction.
-    private void interpJFormat(String[] codesOfCurrentInstruction) {
-        int lineNumber = ~~Integer.parseInt(codesOfCurrentInstruction[1], 2);
-
-        if (codesOfCurrentInstruction[0].equals("000011")) {    // jal stores return address into $ra
-            this.registers[31] = this.pc + 1;
+    public String getInstruction(int lineNum){
+        if (lineNum < instrCodes.size()) {
+            return instrCodes.get(lineNum);
         }
 
-        this.pc = lineNumber - 1;  // assign label address to PC
-        this.stallQuantity = 1;
-        this.stallType = 1;
+        return "empty";
+    }
+
+    public int getInstructionsSize() {
+        return instrCodes.size();
+    }
+
+    public boolean nextBranch() {
+        boolean nextBranch = branchesOccupied.get(0);
+        branchesOccupied.remove(0);
+        return nextBranch;
+    }
+
+    public int getRegisterValue(String reg) {
+        return registers[convert5BitToInt(reg)];
     }
 
     // Pre: codesOfCurrentInstruction is a string array of the binary codes for the current instruction.
@@ -239,18 +148,92 @@ public class Sim {
         }
     }
 
-    public void printMemory(int start, int end) {
-        System.out.println();
-        for (int i = start; i <= end; i++) {
-            System.out.println("[" +  i + "] = " + memory[i]);
+    // Note that J-Format looks as follows: OpCode(6), Addr(26)
+    // Post: interprets a J format instruction.
+    private void interpJFormat(String[] codesOfCurrentInstruction) {
+        int lineNumber = Integer.parseInt(codesOfCurrentInstruction[1], 2);
+        String opCode = codesOfCurrentInstruction[0];
+
+        if (opCode.equals("000011")) {    // jal stores return address into $ra
+            this.registers[31] = this.pc + 1;
         }
-        System.out.println();
+
+        this.pc = lineNumber - 1;  // assign label address to PC
+        this.stallQuantity = 1;
+        this.stallType = 1;
+    }
+
+    // Note that I-Format looks as follows: OpCode(6), rs(5), rt(5), immed(16)
+    // Post: interprets an I format instruction.
+    private void interpIFormat(String[] codesOfCurrentInstruction) {
+        String immediateCode = codesOfCurrentInstruction[codesOfCurrentInstruction.length - 1];
+        int immediateInt = (int)Long.parseLong(extendBits(immediateCode, 32), 2);
+        String opCode = codesOfCurrentInstruction[0]; // opCode of size 6
+        int rs = registerMap.get(codesOfCurrentInstruction[1]); // converts a binary string of size 5 to integer
+        int rt = registerMap.get(codesOfCurrentInstruction[2]); // converts a binary string of size 5 to integer
+
+        if (opCode.equals("100011")) { // lw case
+            registers[rt] = memory[immediateInt + registers[rs]];
+
+            if (codesOfCurrentInstruction[2].equals(this.textInstrs.get(this.pc + 1).getRt()) ||
+                    codesOfCurrentInstruction[2].equals(this.textInstrs.get(this.pc + 1).getRs())) {
+                this.stallQuantity = 1;
+                this.stallType = 2;
+            }
+        }
+
+        else if (opCode.equals("000101")) { // bne case
+            if (registers[rs] != registers[rt]) {
+                pc = pc + immediateInt;
+                this.branchesOccupied.add(true);
+                this.stallQuantity += 3;
+            } else {
+                this.branchesOccupied.add(false);
+            }
+        }
+
+        else if (opCode.equals("001000")) { // addi case
+            registers[rt] = registers[rs] + immediateInt;
+        }
+
+        else if (opCode.equals("000100")) { // beq case
+            if (registers[rs] == registers[rt]) {
+                pc = (pc + immediateInt);
+                this.branchesOccupied.add(true);
+                this.stallQuantity += 3;
+
+            } else {
+                this.branchesOccupied.add(false);
+            }
+        }
+
+        else if (opCode.equals("101011")) { // sw case
+            memory[immediateInt + registers[rs]] = registers[rt];
+        }
+    }
+
+    // Post: Extends "bs" which is a binary number string,
+    // to a binary string which is "length" amount of bits in length.
+    // Returns the resulting binary number string.
+    private String extendBits(String bs, int length) {
+        int bsLength = bs.length();
+        String mostSignificantBit = bs.substring(0, 1);
+
+        while (bsLength != length) {
+            bs = mostSignificantBit + bs;
+            bsLength++;
+        }
+        return bs;
+    }
+
+    private int convert5BitToInt(String fiveBitCode) {
+        return registerMap.get(fiveBitCode);
     }
 
     public void printRegisters()
     {
         System.out.println();
-        System.out.println("pc = " + pc);
+        System.out.println("pc = " + this.pc);
         System.out.println("$0 = " + registers[0] + "\t\t$v0 = " + registers[2] + "\t\t$v1 = " + registers[3] + "\t\t$a0 = " + registers[4]);
         System.out.println("$a1 = " + registers[5] + "\t\t$a2 = " + registers[6] + "\t\t$a3 = " + registers[7] + "\t\t$t0 = " + registers[8]);
         System.out.println("$t1 = " + registers[9] + "\t\t$t2 = " + registers[10] + "\t\t$t3 = " + registers[11] + "\t\t$t4 = " + registers[12]);
@@ -272,10 +255,40 @@ public class Sim {
         System.out.println("q = exit the program");
     }
 
-    public void resetSimulator() {
-        this.registers = new int[32];
-        this.memory = new int[8192];
-        this.pc = 0;
-        System.out.println("        Simulator reset\n");
+    private HashMap<String, Integer> createRegisterMap() {
+        HashMap<String, Integer> registerMap = new HashMap<String, Integer>();
+        registerMap.put("11111", 31);
+        registerMap.put("11110", 30);
+        registerMap.put("11101", 29);
+        registerMap.put("11100", 28);
+        registerMap.put("11011", 27);
+        registerMap.put("11010", 26);
+        registerMap.put("10111", 23);
+        registerMap.put("10110", 22);
+        registerMap.put("10101", 21);
+        registerMap.put("10100", 20);
+        registerMap.put("10011", 19);
+        registerMap.put("10010", 18);
+        registerMap.put("10001", 17);
+        registerMap.put("10000", 16);
+        registerMap.put("11001", 25);
+        registerMap.put("11000", 24);
+        registerMap.put("01111", 15);
+        registerMap.put("01110", 14);
+        registerMap.put("01101", 13);
+        registerMap.put("01100", 12);
+        registerMap.put("01011", 11);
+        registerMap.put("01010", 10);
+        registerMap.put("01001", 9);
+        registerMap.put("01000", 8);
+        registerMap.put("00111", 7);
+        registerMap.put("00110", 6);
+        registerMap.put("00101", 5);
+        registerMap.put("00100", 4);
+        registerMap.put("00011", 3);
+        registerMap.put("00010", 2);
+        registerMap.put("00001", 1);
+        registerMap.put("00000", 0);
+        return registerMap;
     }
 }

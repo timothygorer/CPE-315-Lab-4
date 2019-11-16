@@ -31,41 +31,41 @@ pc	if/id	id/exe	exe/mem	mem/wb
 mips> s
  
 pc	if/id	id/exe	exe/mem	mem/wb
-5	lw	add	stall	lw
- 
-mips> s
- 
-pc	if/id	id/exe	exe/mem	mem/wb
-6	add	lw	add	stall
- 
-mips> s
- 
-pc	if/id	id/exe	exe/mem	mem/wb
-7	lw	add	lw	add
- 
-mips> s
- 
-pc	if/id	id/exe	exe/mem	mem/wb
-8	sub	lw	add	lw
- 
-mips> s
- 
-pc	if/id	id/exe	exe/mem	mem/wb
-8	sub	stall	lw	add
- 
-mips> s
- 
-pc	if/id	id/exe	exe/mem	mem/wb
-9	lw	sub	stall	lw
- 
-mips> s
- 
-pc	if/id	id/exe	exe/mem	mem/wb
-10	sub	lw	sub	stall
- 
-mips> r
- 
-Program complete
-CPI = 1.400	Cycles = 42	Instructions = 30
+   5	lw	add	stall	lw
+   
+   mips> s
+   
+   pc	if/id	id/exe	exe/mem	mem/wb
+   6	add	lw	add	stall
+   
+   mips> s
+   
+   pc	if/id	id/exe	exe/mem	mem/wb
+   7	lw	add	lw	add
+   
+   mips> s
+   
+   pc	if/id	id/exe	exe/mem	mem/wb
+   8	sub	lw	add	lw
+   
+   mips> s
+   
+   pc	if/id	id/exe	exe/mem	mem/wb
+   8	sub	stall	lw	add
+   
+   mips> s
+   
+   pc	if/id	id/exe	exe/mem	mem/wb
+   9	lw	sub	stall	lw
+   
+   mips> s
+   
+   pc	if/id	id/exe	exe/mem	mem/wb
+   10	sub	lw	sub	stall
+   
+   mips> r
+   
+   Program complete
+   CPI = 1.400	Cycles = 42	Instructions = 30
 
 mips> q

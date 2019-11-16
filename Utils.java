@@ -1,4 +1,6 @@
 public class Utils {
+    private static String[] pipeData = new String[4];
+
     private static String getRegisterFormatOperation(String functionCode) {
         if (functionCode.equals("100010")) { // sub case
             return "sub";
@@ -36,51 +38,50 @@ public class Utils {
     }
 
     public static String[] processImmediateFormat(String[] instrCodes) {
-        String [] pipeInfo = new String[4];
-        String opcode = instrCodes[0];
         int last_element = instrCodes.length - 1;
-        pipeInfo[0] = instrCodes[1];
-        pipeInfo[1] = instrCodes[2];
-        pipeInfo[2] = "" + (int) Long.parseLong(extendBits(instrCodes[last_element], 32), 2);
-        if (opcode.equals("001000")) {
-            pipeInfo[3] = "addi";
-        } else if (opcode.equals("000100")) {
-            pipeInfo[3] = "beq";
-        } else if (opcode.equals("000101")) {
-            pipeInfo[3] = "bne";
-        } else if (opcode.equals("100011")) {
-            pipeInfo[3] = "lw";
+        pipeData[2] = "" + (int) Long.parseLong(extendBits(instrCodes[last_element], 32), 2);
+        pipeData[1] = instrCodes[2];
+        pipeData[0] = instrCodes[1];
+
+        if (instrCodes[0].equals("001000")) {
+            pipeData[3] = "addi";
+        } else if (instrCodes[0].equals("000100")) {
+            pipeData[3] = "beq";
+        } else if (instrCodes[0].equals("000101")) {
+            pipeData[3] = "bne";
+        } else if (instrCodes[0].equals("100011")) {
+            pipeData[3] = "lw";
         } else {
-            pipeInfo[3] = "sw";
+            pipeData[3] = "sw";
         }
-        return pipeInfo;
+
+        return pipeData;
     }
 
     // post: Returns a string array of length 4 where index 0 holds rs, index 1 holds rt, index 2 holds rd, and index 3 holds the op name.
     public static String[] processRegisterFormat(String[] instrCodes) {
-        String[] pipeInfo = new String[4];
+        String[] pipeData = new String[4];
         int last_index = instrCodes.length - 1;
-        pipeInfo[0] = instrCodes[1];
+        pipeData[0] = instrCodes[1];
         if (instrCodes.length > 4) {
-            pipeInfo[1] = instrCodes[2];
-            pipeInfo[2] = instrCodes[3];
+            pipeData[1] = instrCodes[2];
+            pipeData[2] = instrCodes[3];
         }
-        pipeInfo[3] = getRegisterFormatOperation(instrCodes[last_index]);
-        return pipeInfo;
+        pipeData[3] = getRegisterFormatOperation(instrCodes[last_index]);
+        return pipeData;
     }
 
     public static String[] processJumpFormat(String[] instrCodes) {
-        String[] pipeInfo = new String[4];
         if (instrCodes[0].equals("000010")) {
-            pipeInfo[3] = "j";
+            pipeData[3] = "j";
         } else {
-            pipeInfo[3] = "jal";
+            pipeData[3] = "jal";
         }
-        int line_number = ~Integer.parseInt(instrCodes[1], 2);
-        pipeInfo[0] = "" + line_number;
-        return pipeInfo;
-    }
 
+        int line = Integer.parseInt(instrCodes[1], 2);
+        pipeData[0] = "" + line;
+        return pipeData;
+    }
 
     // Post: Extends "bs" which is a binary number string,
     // to a binary string which is "length" amount of bits in length.

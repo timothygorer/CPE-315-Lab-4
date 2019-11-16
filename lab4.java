@@ -11,11 +11,9 @@ public class lab4 {
             Scanner assemblyFileScanner = null;
             ArrayList<String> instrs = new ArrayList<String>();
             ArrayList<String> instrCodes = new ArrayList<String>();
-            //ArrayList<PipelineRegister> textInstrs = new ArrayList<>();
             HashMap<String, Integer> labelAddresses = new HashMap<String, Integer>();
             Interpreter i;
 
-            /* Check correct usage */
             if (args.length == 0 || args.length > 2) {
                 System.out.println("Error: Need asm input files");
                 System.exit(0);
@@ -46,9 +44,8 @@ public class lab4 {
             myParser.performFirstPass();
             instrCodes = myParser.performSecondPass();
 
-            ArrayList<PLRegister> textInstrs = null;
-            textInstrs = myParser.thirdPass(instrCodes);
-
+            ArrayList<PLRegister> textInstrs = new ArrayList<PLRegister>();
+            textInstrs = myParser.performPipeline(instrCodes);
 
             if (scriptFile == null) {
                 i = new Interpreter(instrCodes, textInstrs);

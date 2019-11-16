@@ -25,16 +25,16 @@ public class Assembler {
         String firstOperand = operands.get(0);
 
         if (functionCodes.containsKey(operands.get(0))) {       // only R-format instructions have
-            return process_register_format_to_binary(operands);    // functions codes
+            return processRegisterFormatToBinary(operands);    // functions codes
         } else if (operands.size() >= 3) {                    // I-formats have 3 or more instr
-            return process_immediate_format_to_binary(lineNumber, operands);
+            return processImmediateFormatToBinary(lineNumber, operands);
         } else {
-            return process_jump_format_to_binary(operands);
+            return processJumpFormatToBinary(operands);
         }
     }
 
     // Pre: A list of operands of the form: OpCode(6), rs(5), rt(5), immed(16)
-    public String process_immediate_format_to_binary(int lineNumber, ArrayList<String> operands) {
+    public String processImmediateFormatToBinary(int lineNumber, ArrayList<String> operands) {
         String bs = "";
         String bits = "";
         String opCode = operands.get(0);
@@ -62,16 +62,17 @@ public class Assembler {
                 bs += bits;
             }
         } else {
-            int c;
-            int parenthesis;
-            parenthesis = operands.get(2).indexOf("(");
-            c = Integer.parseInt(operands.get(2).substring(0, parenthesis));
+            int indexOfParen = operands.get(2).indexOf("(");
+            String v = operands.get(2).substring(0, indexOfParen);
+            int c = Integer.parseInt(v);
             bits = String.format("%16s", Integer.toBinaryString(c)).replace(' ', '0');
+
             if (bits.length() == 32) {
                 bits = bits.substring(16);
             }
+
             bits = String.format("%16s", bits).replace(' ', '0');
-            bs += this.registers.get(operands.get(2).substring(parenthesis + 1, operands.get(2).length() - 1)) + " ";
+            bs += this.registers.get(operands.get(2).substring(indexOfParen + 1, operands.get(2).length() - 1)) + " ";
             bs += this.registers.get(operands.get(1)) + " ";
             bs += bits;
         }
@@ -80,7 +81,7 @@ public class Assembler {
     }
 
     // Pre: A list of operands of the form: Opcode (6 bits), rs (5 bits), rt (5 bits), rd (5 bits), shamt (5 bits), funct (6 bits)
-    public String process_register_format_to_binary(ArrayList<String> operands) {
+    public String processRegisterFormatToBinary(ArrayList<String> operands) {
         String bs = "";
         String bits = "";
         String opCode = operands.get(0);
@@ -113,7 +114,7 @@ public class Assembler {
     }
 
     // Pre: A list of operands of the form: OpCode(6), Addr(26)
-    public String process_jump_format_to_binary(ArrayList<String> operands) {
+    public String processJumpFormatToBinary(ArrayList<String> operands) {
         String bs = "";
         String operation = operands.get(0);
         String twentySixBitAddr = Integer.toBinaryString(this.labelAddresses.get(operands.get(1)));

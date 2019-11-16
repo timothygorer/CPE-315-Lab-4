@@ -2,31 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ca575cd1-89e1-42a4-a603-8b4f1fb0fe3e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/PipelineObject.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sim.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Utils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab4_fib10.asm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab4_fib10.output" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab4_fib10.script" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab4_fib20.asm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab4_fib20.output" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab4_fib20.script" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab4_test1.asm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab4_test1.output" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab4_test1.script" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab4_test2.asm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab4_test2.output" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab4_test2.script" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assembler.java" beforeDir="false" afterPath="$PROJECT_DIR$/Assembler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Interpreter.java" beforeDir="false" afterPath="$PROJECT_DIR$/Interpreter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/Parser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Simulator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PipelineObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/PipelineObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sim.java" beforeDir="false" afterPath="$PROJECT_DIR$/Sim.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/Utils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lab4.java" beforeDir="false" afterPath="$PROJECT_DIR$/lab4.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4_test1.output" beforeDir="false" afterPath="$PROJECT_DIR$/lab4_test1.output" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/315Lab4/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/315Lab4/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/315Lab4/Interpreter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/315Lab4/Parser.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/315Lab4/Simulator.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/315Lab4/lab4.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/315Lab4/Assembler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/315Lab4/Assembler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/315Lab4/Interpreter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/315Lab4/Interpreter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/315Lab4/PLRegister.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/315Lab4/PLRegister.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/315Lab4/Parser.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/315Lab4/Parser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/315Lab4/PipelineObject.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/315Lab4/PipelineObject.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/315Lab4/Sim.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/315Lab4/Sim.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/315Lab4/Utils.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/315Lab4/Utils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/315Lab4/lab4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/315Lab4/lab4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/315Lab4/lab4_test1.output" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/315Lab4/lab4_test1.output" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -42,33 +36,15 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lab4_test1.asm">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="465">
-              <caret line="31" column="22" selection-start-line="31" selection-start-column="22" selection-end-line="31" selection-end-column="22" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lab4_test1.output">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="18" column="20" selection-start-line="18" selection-start-column="20" selection-end-line="18" selection-end-column="20" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Utils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="498">
-              <caret line="75" column="16" selection-start-line="75" selection-start-column="16" selection-end-line="75" selection-end-column="16" />
+            <state relative-caret-position="436">
+              <caret line="36" column="57" selection-start-line="36" selection-start-column="15" selection-end-line="36" selection-end-column="57" />
               <folding>
-                <element signature="e#79#80#0" expanded="true" />
-                <element signature="e#127#128#0" expanded="true" />
-                <element signature="e#172#173#0" expanded="true" />
-                <element signature="e#238#239#0" expanded="true" />
+                <element signature="e#821#822#0" expanded="true" />
+                <element signature="e#865#866#0" expanded="true" />
+                <element signature="e#918#919#0" expanded="true" />
+                <element signature="e#983#984#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -77,21 +53,37 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/PipelineObject.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="338">
-              <caret line="152" selection-start-line="152" selection-end-line="152" />
+            <state relative-caret-position="313">
+              <caret line="94" column="1" selection-start-line="94" selection-start-column="1" selection-end-line="94" selection-end-column="1" />
               <folding>
-                <element signature="e#163#164#0" expanded="true" />
-                <element signature="e#191#192#0" expanded="true" />
+                <element signature="e#5749#5750#0" expanded="true" />
+                <element signature="e#5791#5792#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/lab4.java">
+        <entry file="file://$PROJECT_DIR$/Sim.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="355">
-              <caret line="55" column="70" selection-start-line="55" selection-start-column="70" selection-end-line="55" selection-end-column="70" />
+            <state relative-caret-position="198">
+              <caret line="44" column="71" selection-start-line="44" selection-start-column="71" selection-end-line="44" selection-end-column="71" />
+              <folding>
+                <element signature="e#0#10630#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#3701#3702#0" expanded="true" />
+                <element signature="e#3752#3753#0" expanded="true" />
+                <element signature="e#10004#10021#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assembler.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="194">
+              <caret line="117" column="25" selection-start-line="117" selection-start-column="18" selection-end-line="117" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -99,8 +91,36 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Interpreter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="32" column="5" selection-start-line="32" selection-start-column="5" selection-end-line="32" selection-end-column="5" />
+            <state relative-caret-position="149">
+              <caret line="14" column="48" selection-start-line="14" selection-start-column="48" selection-end-line="14" selection-end-column="48" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Parser.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="92">
+              <caret line="242" selection-start-line="242" selection-end-line="242" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#875#887#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lab4.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="213">
+              <caret line="21" column="17" selection-start-line="21" selection-start-column="17" selection-end-line="21" selection-end-column="17" />
+              <folding>
+                <element signature="e#1651#1663#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -116,18 +136,45 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>process_reg</find>
-      <find>get</find>
-      <find>register</find>
-      <find>simula</find>
-      <find>format</find>
-      <find>getins</find>
-      <find>jr</find>
-      <find>lw</find>
-      <find>branchesoc</find>
-      <find>size</find>
-      <find>interprfor</find>
+      <find>bitex</find>
+      <find>interpi</find>
+      <find>poll</find>
+      <find>.get(0</find>
+      <find>help</find>
+      <find>registers</find>
+      <find>jump_addr</find>
+      <find>printmemo</find>
+      <find>piped</find>
+      <find>pipein</find>
+      <find>isrty</find>
+      <find>simulatorst</find>
+      <find>steps_ru</find>
+      <find>step</find>
+      <find>runc</find>
+      <find>isrtyp</find>
+      <find>utils.is</find>
+      <find>interpj</find>
+      <find>parenth</find>
+      <find>printmem</find>
+      <find>pipeda</find>
+      <find>processimmed</find>
+      <find>performpip</find>
+      <find>processregi</find>
+      <find>processr</find>
+      <find>process</find>
+      <find>pipeInfo</find>
+      <find>getregisterfor</find>
+      <find>&gt; 4</find>
+      <find>/*</find>
     </findStrings>
+    <replaceStrings>
+      <replace>ifID</replace>
+      <replace>memWb</replace>
+      <replace>PLRegister</replace>
+      <replace>PipelineObject</replace>
+      <replace>pipeData</replace>
+      <replace>jumpAddress</replace>
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -137,21 +184,20 @@
       <list>
         <option value="$PROJECT_DIR$/Pipeline.java" />
         <option value="$PROJECT_DIR$/BinToTextUtils.java" />
-        <option value="$PROJECT_DIR$/Utils.java" />
         <option value="$PROJECT_DIR$/Simulator.java" />
+        <option value="$PROJECT_DIR$/Assembler.java" />
+        <option value="$PROJECT_DIR$/Utils.java" />
         <option value="$PROJECT_DIR$/Interpreter.java" />
         <option value="$PROJECT_DIR$/PipelineObject.java" />
-        <option value="$PROJECT_DIR$/Sim.java" />
         <option value="$PROJECT_DIR$/Parser.java" />
         <option value="$PROJECT_DIR$/lab4.java" />
+        <option value="$PROJECT_DIR$/Sim.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" fullScreen="true">
-    <option name="x" value="29" />
-    <option name="y" value="77" />
     <option name="width" value="1680" />
-    <option name="height" value="966" />
+    <option name="height" value="1050" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -205,7 +251,7 @@
     <configuration name="Main" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="lab4" />
       <module name="315Lab4" />
-      <option name="PROGRAM_PARAMETERS" value="lab4_fib10.asm" />
+      <option name="PROGRAM_PARAMETERS" value="lab4_fib10.asm lab4_fib10.script" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -234,13 +280,13 @@
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24969475" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Terminal" />
+      <window_info anchor="bottom" id="Terminal" weight="0.32959184" />
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
       <window_info anchor="bottom" id="Flutter Performance" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Messages" visible="true" weight="0.32959184" />
+      <window_info anchor="bottom" id="Messages" weight="0.32959184" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32959184" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.26938775" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -255,27 +301,42 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/PipelineObject.java</url>
+          <line>97</line>
+          <properties />
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="debuggerHistoryManager">
+    <expressions id="breakpointCondition">
+      <expression>
+        <expression-string>NullPointerException</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>IndexOutOfBoundsException</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>IndexOutOfBoundsException</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
+  </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/lab4_test2.script">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/lab4_test1.script">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/lab4_fib20.script">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lab4_test1.asm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="31" column="22" selection-start-line="31" selection-start-column="22" selection-end-line="31" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lab4_fib10.script">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lab4_fib10.output">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/Pipeline.java">
@@ -299,13 +360,6 @@
     <entry file="file://$PROJECT_DIR$/lab4_test2.output">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/lab4_fib10.asm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="46" lean-forward="true" selection-start-line="6" selection-start-column="46" selection-end-line="6" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/BinToTextUtils.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
@@ -322,43 +376,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lab4_test1.output">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="20" selection-start-line="18" selection-start-column="20" selection-end-line="18" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Utils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="498">
-          <caret line="75" column="16" selection-start-line="75" selection-start-column="16" selection-end-line="75" selection-end-column="16" />
-          <folding>
-            <element signature="e#79#80#0" expanded="true" />
-            <element signature="e#127#128#0" expanded="true" />
-            <element signature="e#172#173#0" expanded="true" />
-            <element signature="e#238#239#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lab4_fib20.asm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lab4_fib20.output">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-200" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assembler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="885">
-          <caret line="68" column="32" selection-start-line="68" selection-start-column="26" selection-end-line="68" selection-end-column="32" />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Makefile">
@@ -380,55 +400,139 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/PipelineObject.java">
+    <entry file="file://$PROJECT_DIR$/lab4_fib10.asm">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="338">
-          <caret line="152" selection-start-line="152" selection-end-line="152" />
+        <state relative-caret-position="90">
+          <caret line="6" column="46" lean-forward="true" selection-start-line="6" selection-start-column="46" selection-end-line="6" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lab4_fib20.asm">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lab4_fib10.script">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/out/production/315Lab4/lab4_test1.output">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-470" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lab4_fib10.output">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="60" column="7" lean-forward="true" selection-start-line="60" selection-start-column="7" selection-end-line="60" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lab4_fib10.pls">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="196">
+          <caret line="42" column="36" lean-forward="true" selection-start-line="42" selection-start-column="36" selection-end-line="42" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lab4_test1.script">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lab4_test1.asm">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="381">
+          <caret line="44" column="16" selection-start-line="44" selection-start-column="16" selection-end-line="44" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lab4_test1.pls">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="226">
+          <caret line="45" column="7" lean-forward="true" selection-start-line="45" selection-start-column="7" selection-end-line="45" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lab4_test1.output">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="31" column="1" selection-start-line="31" selection-start-column="1" selection-end-line="31" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assembler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="117" column="25" selection-start-line="117" selection-start-column="18" selection-end-line="117" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Interpreter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="149">
+          <caret line="14" column="48" selection-start-line="14" selection-start-column="48" selection-end-line="14" selection-end-column="48" />
           <folding>
-            <element signature="e#163#164#0" expanded="true" />
-            <element signature="e#191#192#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Sim.java">
+    <entry file="file://$PROJECT_DIR$/Utils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="71" column="55" selection-start-line="71" selection-start-column="55" selection-end-line="71" selection-end-column="55" />
+        <state relative-caret-position="436">
+          <caret line="36" column="57" selection-start-line="36" selection-start-column="15" selection-end-line="36" selection-end-column="57" />
           <folding>
-            <element signature="e#2414#2415#0" expanded="true" />
-            <element signature="e#2461#2462#0" expanded="true" />
-            <element signature="e#2499#2500#0" expanded="true" />
-            <element signature="e#2543#2544#0" expanded="true" />
-            <element signature="e#2589#2590#0" expanded="true" />
-            <element signature="e#2643#2644#0" expanded="true" />
-            <element signature="e#2466#2467#0" expanded="true" />
-            <element signature="e#2523#2524#0" expanded="true" />
+            <element signature="e#821#822#0" expanded="true" />
+            <element signature="e#865#866#0" expanded="true" />
+            <element signature="e#918#919#0" expanded="true" />
+            <element signature="e#983#984#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PipelineObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="313">
+          <caret line="94" column="1" selection-start-line="94" selection-start-column="1" selection-end-line="94" selection-end-column="1" />
+          <folding>
+            <element signature="e#5749#5750#0" expanded="true" />
+            <element signature="e#5791#5792#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Parser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="309">
-          <caret line="49" column="24" selection-start-line="49" selection-start-column="24" selection-end-line="49" selection-end-column="24" />
+        <state relative-caret-position="92">
+          <caret line="242" selection-start-line="242" selection-end-line="242" />
           <folding>
-            <element signature="e#792#804#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#875#887#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Interpreter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="32" column="5" selection-start-line="32" selection-start-column="5" selection-end-line="32" selection-end-column="5" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lab4.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="355">
-          <caret line="55" column="70" selection-start-line="55" selection-start-column="70" selection-end-line="55" selection-end-column="70" />
+        <state relative-caret-position="213">
+          <caret line="21" column="17" selection-start-line="21" selection-start-column="17" selection-end-line="21" selection-end-column="17" />
+          <folding>
+            <element signature="e#1651#1663#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Sim.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="44" column="71" selection-start-line="44" selection-start-column="71" selection-end-line="44" selection-end-column="71" />
+          <folding>
+            <element signature="e#0#10630#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#3701#3702#0" expanded="true" />
+            <element signature="e#3752#3753#0" expanded="true" />
+            <element signature="e#10004#10021#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

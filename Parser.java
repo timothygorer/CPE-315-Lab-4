@@ -1,4 +1,5 @@
 import java.io.File;
+import java.nio.channels.Pipe;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -6,14 +7,15 @@ import java.util.Scanner;
 
 public class Parser {
     private File f;
-    private ArrayList<String> instrs;
     private ArrayList<String> instrCodes;
     private HashMap<String, Integer> labelAddresses;
+    private String[] pipeData;
 
-    public Parser(ArrayList<String> instrs, HashMap<String, Integer> labelAddresses, File f) {
-        this.instrs = instrs;
+    public Parser(ArrayList<String> instrCodes, HashMap<String, Integer> labelAddresses, File f) {
+        this.instrCodes = instrCodes;
         this.labelAddresses = labelAddresses;
         this.f = f;
+        this.pipeData = new String[4];
     }
 
     public boolean isComment(String s) {
@@ -24,41 +26,42 @@ public class Parser {
         return false;
     }
 
-    public ArrayList<PLRegister> thirdPass(ArrayList<String> instructions) {
-        ArrayList<PLRegister> plain_text = new ArrayList<PLRegister>();
-        for (String s : instructions) {
-            String [] instruction_codes = s.split("\\s+");
-            String opcode = instruction_codes[0];
-            String [] pipeInfo = new String[4];
-            PLRegister if_id = new PLRegister("empty");
+    public ArrayList<PLRegister> performPipeline(ArrayList<String> instructions) {
+        ArrayList<PLRegister> plainText = new ArrayList<PLRegister>();
+        for (int i = 0; i < instructions.size(); i++) {
+            String[] instrCodes = instructions.get(i).split("\\s+");
+            String oc = instrCodes[0];
+            PLRegister ifID = new PLRegister("empty");
 
-            if (Utils.isRegisterFormat(opcode)) {
-                pipeInfo = Utils.processRegisterFormat(instruction_codes);
-                if_id.rs = pipeInfo[0];
-                if_id.rt = pipeInfo[1];
-                if_id.rd = pipeInfo[2];
-                if_id.op = pipeInfo[3];
-            } else if (Utils.isJumpFormat(opcode)) {
-                pipeInfo = Utils.processJumpFormat(instruction_codes);
-                if_id.branchAddress = Integer.parseInt(pipeInfo[0]);
-                if_id.op = pipeInfo[3];
+            if (isRegisterFormat(oc)) {
+                pipeData = processRegisterFormat(instrCodes);
+                ifID.setRs(pipeData[0]);
+                ifID.setRt(pipeData[1]);
+                ifID.setRd(pipeData[2]);
+                ifID.setOp(pipeData[3]);
+            } else if (isJumpFormat(oc)) {
+                pipeData = processJumpFormat(instrCodes);
+                ifID.setBA(Integer.parseInt(pipeData[0]));
+                ifID.setOp(pipeData[3]);
             } else {
-                pipeInfo = Utils.processImmediateFormat(instruction_codes);
-                if_id.rs = pipeInfo[0];
-                if_id.rt = pipeInfo[1];
-                if_id.branchAddress = Integer.parseInt(pipeInfo[2]);
-                if_id.op = pipeInfo[3];
+                pipeData = processImmediateFormat(instrCodes);
+                ifID.setRs(pipeData[0]);
+                ifID.setRt(pipeData[1]);
+                ifID.setBA(Integer.parseInt(pipeData[2]));
+                ifID.setOp(pipeData[3]);
             }
-            plain_text.add(if_id);
+
+            plainText.add(ifID);
         }
-        return plain_text;
+
+        return plainText;
     }
 
     // Pre: String s is a string which contains a label.
     // Post: This function strips String s's label and add its to the labelAddresses map.
     public void addLabelToLabelAddressMap(String s) {
         String strippedLabel = s.substring(0, s.indexOf(":"));
-        this.labelAddresses.put(strippedLabel, this.instrs.size());
+        this.labelAddresses.put(strippedLabel, this.instrCodes.size());
     }
 
     // Post: Gets instruction after label if there is one, otherwise returns an empty string.
@@ -93,19 +96,19 @@ public class Parser {
                         instruction = getInstructionAfterLabel(currentLineString);
 
                         if (!instruction.equals("")) {
-                            instrs.add(instruction);
+                            instrCodes.add(instruction);
                         }
                     }
 
                     else if (currentLineString.contains("#")) { // instruction  with a comment
                         currentLineString = currentLineString.substring(0, currentLineString.indexOf("#"));
                         instruction = currentLineString;
-                        instrs.add(instruction);
+                        instrCodes.add(instruction);
                     }
 
                     else { // instruction w/o a comment
                         instruction = currentLineString;
-                        instrs.add(instruction);
+                        instrCodes.add(instruction);
                     }
                 }
             }
@@ -146,14 +149,11 @@ public class Parser {
         Assembler a = new Assembler(labelAddresses);
 
         // split the instruction string into an array where each operand is an element.
-        for (String instr : this.instrs) {
-            //System.out.println(instr);
+        for (String instr : this.instrCodes) {
             instr = cleanInstruction(instr);
-
             String[] instrOperands = instr.split(" ");
             allOperands = new ArrayList<String>(Arrays.asList(instrOperands));
             allOperands = cleanArray(allOperands);
-            //System.out.println(allOperands);
 
             if (a.checkIsValidInstruction(instrOperands[0])) {
                 String assembledString = assembler.performAssembly(lineNumber, allOperands);
@@ -172,5 +172,103 @@ public class Parser {
         for (int i = 0; i < arr.length; i++) {
             System.out.println("Item: " + arr[i]);
         }
+    }
+
+    private static String getRegisterFormatOp(String functionCode) {
+        if (functionCode.equals("100010")) { // sub case
+            return "sub";
+        }
+
+        else if (functionCode.equals("101010")) { // slt case
+            return "slt";
+        }
+
+        else if (functionCode.equals("100101")) { // or case
+            return "or";
+        }
+
+        else if (functionCode.equals("100000")) { // add case
+            return "add";
+        }
+
+        else if (functionCode.equals("000000")) { // sll case
+            return "sll";
+        }
+
+        else if (functionCode.equals("100100")) { // and case
+            return "and";
+        }
+
+        return "jr";
+    }
+
+    public static boolean isRegisterFormat(String oc) {
+        return (oc.equals("000000"));
+    }
+
+    public static boolean isJumpFormat(String oc) {
+        return oc.equals("000011") || oc.equals("000010");
+    }
+
+    public String[] processImmediateFormat(String[] instrCodes) {
+        this.pipeData[2] = "" + (int) Long.parseLong(extendBits(instrCodes[instrCodes.length - 1], 32), 2);
+        this.pipeData[1] = instrCodes[2];
+        this.pipeData[0] = instrCodes[1];
+
+        if (instrCodes[0].equals("001000")) {
+            this.pipeData[3] = "addi";
+        } else if (instrCodes[0].equals("000100")) {
+            this.pipeData[3] = "beq";
+        } else if (instrCodes[0].equals("000101")) {
+            this.pipeData[3] = "bne";
+        } else if (instrCodes[0].equals("100011")) {
+            this.pipeData[3] = "lw";
+        } else {
+            this.pipeData[3] = "sw";
+        }
+
+        return this.pipeData;
+    }
+
+    // post: Returns a string array of length 4 where index 0 holds rs, index 1 holds rt, index 2 holds rd, and index 3 holds the op name.
+    public static String[] processRegisterFormat(String[] instrCodes) {
+        String[] pipeData = new String[4];
+        pipeData[0] = instrCodes[1];
+
+        pipeData[3] = getRegisterFormatOp(instrCodes[instrCodes.length - 1]);
+
+        if (instrCodes.length > 4) {
+
+            pipeData[2] = instrCodes[3];
+            pipeData[1] = instrCodes[2];
+        }
+
+        return pipeData;
+    }
+
+    public String[] processJumpFormat(String[] instrCodes) {
+        if (instrCodes[0].equals("000010")) {
+            this.pipeData[3] = "j";
+        } else {
+            this.pipeData[3] = "jal";
+        }
+
+        int line = Integer.parseInt(instrCodes[1], 2);
+        this.pipeData[0] = "" + line;
+        return this.pipeData;
+    }
+
+    // Post: Extends "bs" which is a binary number string,
+    // to a binary string which is "length" amount of bits in length.
+    // Returns the resulting binary number string.
+    private static String extendBits(String bs, int length) {
+        int bsLength = bs.length();
+        String mostSignificantBit = bs.substring(0, 1);
+
+        while (bsLength != length) {
+            bs = mostSignificantBit + bs;
+            bsLength++;
+        }
+        return bs;
     }
 }
