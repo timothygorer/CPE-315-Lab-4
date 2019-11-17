@@ -1,30 +1,19 @@
 
 
 public class PipelineObject{
-    private PLRegister ifID;
-    private PLRegister idExe;
-    private PLRegister exeMem;
-    private PLRegister memWb;
-    private int pc;
-    private int numInstrs;
-    private int numCycles;
-    private int jumpAddress;
-    private boolean completed;
-    private boolean stalled;
-    private boolean jumped;
+    private int numInstrs = 0;
+    private int numCycles = 0;
+    private int jumpAddress = 0;
+    private PLRegister ifID = new PLRegister("empty");;
+    private PLRegister idExe = new PLRegister("empty");
+    private PLRegister exeMem = new PLRegister("empty");
+    private PLRegister memWb = new PLRegister("empty");
+    private int pc = 0;
+    private boolean completed = false;
+    private boolean stalled = false;
+    private boolean jumped = false;
 
     public PipelineObject(){
-        this.pc = 0;
-        this.numInstrs = 0;
-        this.numCycles = 0;
-        this.jumpAddress = 0;
-        this.ifID = new PLRegister("empty");
-        this.idExe = new PLRegister("empty");
-        this.exeMem = new PLRegister("empty");
-        this.memWb = new PLRegister("empty");
-        this.completed = false;
-        this.stalled = false;
-        this.jumped = false;
     }
 
     // Post: Prints the PipelineObject.
@@ -59,21 +48,20 @@ public class PipelineObject{
     }
 
     private void writeBack(Sim simulator) {
-        if (this.memWb.getOp().equals("squash") || this.memWb.getOp().equals("stall")) {
+        if (!this.memWb.getOp().equals("squash") && !this.memWb.getOp().equals("stall")) {
+            this.numCycles++;
 
-        } else if (this.memWb.getOp().equals("empty")) {
-            this.numCycles++;
-        } else {
-            this.numInstrs++;
-            this.numCycles++;
+            if (!this.memWb.getOp().equals("empty")) {
+                this.numInstrs++;
+            }
         }
 
         this.memWb = this.exeMem;
 
         if (this.memWb.getOp().equals("bne") || this.memWb.getOp().equals("beq")) {
             if (simulator.nextBranch()) {
-                this.numCycles += 3;
                 this.jumped = true;
+                this.numCycles += 3;
                 this.pc += this.memWb.getBA() - 2;
                 this.exeMem = new PLRegister("squash");
                 this.idExe = new PLRegister("squash");
@@ -113,6 +101,8 @@ public class PipelineObject{
     }
 
     private void decode(Sim simulator) {
+        Utils utils = new Utils();
+
         if (this.stalled || this.jumped) {
             this.stalled = false;  // reset booleans
             this.jumped = false;
@@ -120,7 +110,7 @@ public class PipelineObject{
         }
 
         String instruction = simulator.getInstruction(pc++);
-        if (this.pc > simulator.getInstructionsSize()) {
+        if (this.pc > simulator.getSizeOfInstr()) {
             this.pc -= 1;
         }
         if (instruction.equals("empty")) {
@@ -135,17 +125,17 @@ public class PipelineObject{
         String[] pipeData = new String[4];
 
         if (opcode.equals("000000")) { // r format
-            pipeData = Utils.processRegisterFormat(instrCodes);
+            pipeData = utils.processRegisterFormat(instrCodes);
             this.ifID.setRs(pipeData[0]);
             this.ifID.setRt(pipeData[1]);
             this.ifID.setRd(pipeData[2]);
             this.ifID.setOp(pipeData[3]);
         } else if (opcode.equals("000011") || opcode.equals("000010")) { // j format
-            pipeData = Utils.processJumpFormat(instrCodes);
+            pipeData = utils.processJumpFormat(instrCodes);
             this.ifID.setBA(Integer.parseInt(pipeData[0]));
             this.ifID.setOp(pipeData[3]);
         } else {
-            pipeData = Utils.processImmediateFormat(instrCodes);
+            pipeData = utils.processImmediateFormat(instrCodes);
             this.ifID.setRs(pipeData[0]);
             this.ifID.setRt(pipeData[1]);
             this.ifID.setBA(Integer.parseInt(pipeData[2]));

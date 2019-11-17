@@ -2,16 +2,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Assembler {
-    private HashMap<String, String> registers;
+    private HashMap<String, String> registers = createRegisterMap();
     private HashMap<String, Integer> labelAddresses;
-    private HashMap<String, String> functionCodes;
-    private HashMap<String, String> opCodes;
+    private HashMap<String, String> functionCodes = createFunctionCodeMap();
+    private HashMap<String, String> opCodes = createOpCodeMap();
 
     public Assembler(HashMap<String, Integer> labelAddresses) {
-        this.registers = createRegisterMap();
         this.labelAddresses = labelAddresses;
-        this.functionCodes = createFunctionCodeMap();
-        this.opCodes = createOpCodeMap();
     }
 
     public boolean checkIsValidInstruction(String opCode) {

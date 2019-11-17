@@ -6,14 +6,12 @@ import java.util.Scanner;
 public class Interpreter {
     private Sim s;
     private Scanner i;
-    private boolean interactiveMode;
-    private PipelineObject plo;
+    private boolean interactiveMode = false;
+    private PipelineObject plo =  new PipelineObject();
 
     // constructor for script mode
     public Interpreter(ArrayList<String> instrCodes, ArrayList<PLRegister> textInstructions, File scriptFile) {
-        interactiveMode = false;
         s = new Sim(textInstructions, instrCodes);
-        plo = new PipelineObject();
         readScriptFile(scriptFile);
     }
 

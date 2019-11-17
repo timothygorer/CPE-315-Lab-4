@@ -1,39 +1,21 @@
-/*
- * Description: Simulates operation of MIPS instructions; This includes
- *              executing instructions and recording the changes those
- *              instructions make. Simulator sets aside memory to emulate
- *              the entities needed to run the MIPS language, including:
- *
- *                 - 8K 4-Byte Memory
- *                 - 32 4-Byte Registers
- *
- */
-
 import java.util.*;
 import java.lang.*;
 import java.io.*;
 
 public class Sim {
-    private int pc;
-    private int[] memory; // should be 8192 slots of memory where each slot is 4 bytes
-    private int[] registers; // should be 32 slots of registers where each slot is 4 bytes
+    private int pc = 0;
+    private int[] memory = new int[8192]; // should be 8192 slots of memory where each slot is 4 bytes
+    private int[] registers = new int[32]; // should be 32 slots of registers where each slot is 4 bytes
     private ArrayList<String> instrCodes;
-    private HashMap<String, Integer> registerMap; // 5 bit code to register integer map
+    private HashMap<String, Integer> registerMap = createRegisterMap();; // 5 bit code to register integer map
     private int stallType;
-    private int stallQuantity;
-    private LinkedList<Boolean> branchesOccupied;
+    private int stallQuantity = 0;
+    private ArrayList<Boolean> branchesOccupied = new ArrayList<>();
     private ArrayList<PLRegister> textInstrs;
-    private ArrayList<ArrayList> instrCodesAndTextInstrs;
 
     public Sim(ArrayList<PLRegister> plainTextInstructions, ArrayList<String> instrCodes) {
-        this.pc = 0;
-        this.memory = new int[8192];
-        this.registers = new int[32];
-        this.registerMap = createRegisterMap();
         this.instrCodes = instrCodes;
         this.textInstrs = plainTextInstructions;
-        this.branchesOccupied = new LinkedList<Boolean>();
-        this.stallQuantity = 0;
     }
 
     // Pre: steps through the program "steps" number of times, executing "steps" number of instructions or until last instruction is met.
@@ -86,18 +68,18 @@ public class Sim {
         return "empty";
     }
 
-    public int getInstructionsSize() {
-        return instrCodes.size();
+    public int getSizeOfInstr() {
+        return this.instrCodes.size();
     }
 
     public boolean nextBranch() {
-        boolean nextBranch = branchesOccupied.get(0);
-        branchesOccupied.remove(0);
+        boolean nextBranch = this.branchesOccupied.get(0);
+        this.branchesOccupied.remove(0);
         return nextBranch;
     }
 
     public int getRegisterValue(String reg) {
-        return registers[convert5BitToInt(reg)];
+        return this.registers[convert5BitToInt(reg)];
     }
 
     // Pre: codesOfCurrentInstruction is a string array of the binary codes for the current instruction.

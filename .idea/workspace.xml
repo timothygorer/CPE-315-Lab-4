@@ -2,25 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ca575cd1-89e1-42a4-a603-8b4f1fb0fe3e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assembler.class" beforeDir="false" afterPath="$PROJECT_DIR$/Assembler.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assembler.java" beforeDir="false" afterPath="$PROJECT_DIR$/Assembler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Interpreter.class" beforeDir="false" afterPath="$PROJECT_DIR$/Interpreter.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Interpreter.java" beforeDir="false" afterPath="$PROJECT_DIR$/Interpreter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PLRegister.class" beforeDir="false" afterPath="$PROJECT_DIR$/PLRegister.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parser.class" beforeDir="false" afterPath="$PROJECT_DIR$/Parser.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/Parser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PipelineObject.class" beforeDir="false" afterPath="$PROJECT_DIR$/PipelineObject.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PipelineObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/PipelineObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sim.class" beforeDir="false" afterPath="$PROJECT_DIR$/Sim.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Sim.java" beforeDir="false" afterPath="$PROJECT_DIR$/Sim.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Utils.class" beforeDir="false" afterPath="$PROJECT_DIR$/Utils.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/Utils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab4.java" beforeDir="false" afterPath="$PROJECT_DIR$/lab4.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab4_test1.output" beforeDir="false" afterPath="$PROJECT_DIR$/lab4_test1.output" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/315Lab4/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/315Lab4/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/315Lab4/Assembler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/315Lab4/Assembler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/315Lab4/Interpreter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/315Lab4/Interpreter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/315Lab4/PLRegister.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/315Lab4/PLRegister.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/315Lab4/Parser.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/315Lab4/Parser.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/315Lab4/PipelineObject.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/315Lab4/PipelineObject.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/315Lab4/Sim.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/315Lab4/Sim.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/315Lab4/Utils.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/315Lab4/Utils.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/315Lab4/lab4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/315Lab4/lab4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/315Lab4/lab4_test1.output" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/315Lab4/lab4_test1.output" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -38,9 +32,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Utils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="525">
-              <caret line="35" column="20" selection-start-line="35" selection-start-column="20" selection-end-line="35" selection-end-column="20" />
+            <state relative-caret-position="1095">
+              <caret line="73" column="27" selection-start-line="73" selection-start-column="27" selection-end-line="73" selection-end-column="27" />
               <folding>
+                <element signature="e#99#100#0" expanded="true" />
+                <element signature="e#118#119#0" expanded="true" />
                 <element signature="e#821#822#0" expanded="true" />
                 <element signature="e#865#866#0" expanded="true" />
                 <element signature="e#918#919#0" expanded="true" />
@@ -50,11 +46,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/PipelineObject.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="295">
-              <caret line="218" column="16" lean-forward="true" selection-start-line="218" selection-start-column="16" selection-end-line="218" selection-end-column="16" />
+            <state relative-caret-position="262">
+              <caret line="52" lean-forward="true" selection-start-line="52" selection-end-line="52" />
               <folding>
                 <element signature="e#5664#5665#0" expanded="true" />
                 <element signature="e#5706#5707#0" expanded="true" />
@@ -91,13 +87,12 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Sim.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
-              <caret line="178" column="96" selection-start-line="178" selection-start-column="96" selection-end-line="178" selection-end-column="96" />
+            <state relative-caret-position="15">
+              <caret line="70" column="29" selection-start-line="70" selection-start-column="29" selection-end-line="70" selection-end-column="29" />
               <folding>
-                <element signature="e#0#10630#0" expanded="true" />
                 <element signature="imports" expanded="true" />
                 <element signature="e#3701#3702#0" expanded="true" />
                 <element signature="e#3752#3753#0" expanded="true" />
@@ -110,8 +105,12 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assembler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="563">
-              <caret line="116" column="43" selection-start-line="116" selection-start-column="43" selection-end-line="116" selection-end-column="43" />
+            <state relative-caret-position="105">
+              <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+              <folding>
+                <element signature="e#407#408#0" expanded="true" />
+                <element signature="e#459#460#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -119,8 +118,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Interpreter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="149">
-              <caret line="14" column="48" selection-start-line="14" selection-start-column="48" selection-end-line="14" selection-end-column="48" />
+            <state relative-caret-position="973">
+              <caret line="66" column="29" selection-start-line="66" selection-start-column="29" selection-end-line="66" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -131,23 +130,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Parser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1100">
-              <caret line="48" column="23" selection-start-line="48" selection-start-column="23" selection-end-line="48" selection-end-column="23" />
+            <state relative-caret-position="315">
+              <caret line="21" column="22" selection-start-line="21" selection-start-column="22" selection-end-line="21" selection-end-column="22" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#875#887#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lab4.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="213">
-              <caret line="21" column="17" selection-start-line="21" selection-start-column="17" selection-end-line="21" selection-end-column="17" />
-              <folding>
-                <element signature="e#1651#1663#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -164,14 +151,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>.get(0</find>
-      <find>help</find>
-      <find>registers</find>
-      <find>jump_addr</find>
-      <find>printmemo</find>
-      <find>piped</find>
-      <find>pipein</find>
-      <find>isrty</find>
       <find>simulatorst</find>
       <find>steps_ru</find>
       <find>step</find>
@@ -187,21 +166,29 @@
       <find>processregi</find>
       <find>processr</find>
       <find>pipeInfo</find>
-      <find>getregisterfor</find>
       <find>&gt; 4</find>
       <find>/*</find>
       <find>parenthe</find>
-      <find>process</find>
       <find>_</find>
+      <find>100010</find>
+      <find>getregisterfor</find>
+      <find>getregisterformatop</find>
+      <find>processregisterformat</find>
+      <find>isregis</find>
+      <find>completed</find>
+      <find>process</find>
+      <find>last_in</find>
       <find>processreg</find>
+      <find>jr</find>
+      <find>stalltyp</find>
     </findStrings>
     <replaceStrings>
       <replace>ifID</replace>
       <replace>memWb</replace>
       <replace>PLRegister</replace>
       <replace>PipelineObject</replace>
-      <replace>jumpAddress</replace>
       <replace>pipeData</replace>
+      <replace>jumpAddress</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -213,13 +200,13 @@
         <option value="$PROJECT_DIR$/Pipeline.java" />
         <option value="$PROJECT_DIR$/BinToTextUtils.java" />
         <option value="$PROJECT_DIR$/Simulator.java" />
-        <option value="$PROJECT_DIR$/Utils.java" />
-        <option value="$PROJECT_DIR$/Interpreter.java" />
         <option value="$PROJECT_DIR$/lab4.java" />
-        <option value="$PROJECT_DIR$/Assembler.java" />
-        <option value="$PROJECT_DIR$/PipelineObject.java" />
+        <option value="$PROJECT_DIR$/Utils.java" />
         <option value="$PROJECT_DIR$/Parser.java" />
+        <option value="$PROJECT_DIR$/Assembler.java" />
+        <option value="$PROJECT_DIR$/Interpreter.java" />
         <option value="$PROJECT_DIR$/Sim.java" />
+        <option value="$PROJECT_DIR$/PipelineObject.java" />
       </list>
     </option>
   </component>
@@ -311,10 +298,10 @@
       <window_info anchor="bottom" id="Terminal" weight="0.32959184" />
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
       <window_info anchor="bottom" id="Flutter Performance" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Messages" visible="true" weight="0.32959184" />
+      <window_info anchor="bottom" id="Messages" weight="0.32959184" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.26938775" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.26938775" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -476,10 +463,36 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Utils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1095">
+          <caret line="73" column="27" selection-start-line="73" selection-start-column="27" selection-end-line="73" selection-end-column="27" />
+          <folding>
+            <element signature="e#99#100#0" expanded="true" />
+            <element signature="e#118#119#0" expanded="true" />
+            <element signature="e#821#822#0" expanded="true" />
+            <element signature="e#865#866#0" expanded="true" />
+            <element signature="e#918#919#0" expanded="true" />
+            <element signature="e#983#984#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assembler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+          <folding>
+            <element signature="e#407#408#0" expanded="true" />
+            <element signature="e#459#460#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Interpreter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="14" column="48" selection-start-line="14" selection-start-column="48" selection-end-line="14" selection-end-column="48" />
+        <state relative-caret-position="973">
+          <caret line="66" column="29" selection-start-line="66" selection-start-column="29" selection-end-line="66" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -496,30 +509,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Assembler.java">
+    <entry file="file://$PROJECT_DIR$/Parser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="563">
-          <caret line="116" column="43" selection-start-line="116" selection-start-column="43" selection-end-line="116" selection-end-column="43" />
+        <state relative-caret-position="315">
+          <caret line="21" column="22" selection-start-line="21" selection-start-column="22" selection-end-line="21" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#875#887#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Utils.java">
+    <entry file="file://$PROJECT_DIR$/Sim.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="35" column="20" selection-start-line="35" selection-start-column="20" selection-end-line="35" selection-end-column="20" />
+        <state relative-caret-position="15">
+          <caret line="70" column="29" selection-start-line="70" selection-start-column="29" selection-end-line="70" selection-end-column="29" />
           <folding>
-            <element signature="e#821#822#0" expanded="true" />
-            <element signature="e#865#866#0" expanded="true" />
-            <element signature="e#918#919#0" expanded="true" />
-            <element signature="e#983#984#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#3701#3702#0" expanded="true" />
+            <element signature="e#3752#3753#0" expanded="true" />
+            <element signature="e#10004#10021#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/PipelineObject.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="295">
-          <caret line="218" column="16" lean-forward="true" selection-start-line="218" selection-start-column="16" selection-end-line="218" selection-end-column="16" />
+        <state relative-caret-position="262">
+          <caret line="52" lean-forward="true" selection-start-line="52" selection-end-line="52" />
           <folding>
             <element signature="e#5664#5665#0" expanded="true" />
             <element signature="e#5706#5707#0" expanded="true" />
@@ -551,31 +568,6 @@
             <element signature="e#6495#6496#0" expanded="true" />
             <element signature="e#6582#6583#0" expanded="true" />
             <element signature="e#6615#6616#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Parser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1100">
-          <caret line="48" column="23" selection-start-line="48" selection-start-column="23" selection-end-line="48" selection-end-column="23" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#875#887#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Sim.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="178" column="96" selection-start-line="178" selection-start-column="96" selection-end-line="178" selection-end-column="96" />
-          <folding>
-            <element signature="e#0#10630#0" expanded="true" />
-            <element signature="imports" expanded="true" />
-            <element signature="e#3701#3702#0" expanded="true" />
-            <element signature="e#3752#3753#0" expanded="true" />
-            <element signature="e#10004#10021#0" expanded="true" />
           </folding>
         </state>
       </provider>

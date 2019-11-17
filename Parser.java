@@ -203,11 +203,19 @@ public class Parser {
     }
 
     public static boolean isRegisterFormat(String oc) {
-        return (oc.equals("000000"));
+        if (oc.equals("000000")) {
+            return true;
+        }
+
+        return false;
     }
 
     public static boolean isJumpFormat(String oc) {
-        return oc.equals("000011") || oc.equals("000010");
+        if (oc.equals("000011") || oc.equals("000010")) {
+            return true;
+        }
+
+        return false;
     }
 
     public String[] processImmediateFormat(String[] instrCodes) {
